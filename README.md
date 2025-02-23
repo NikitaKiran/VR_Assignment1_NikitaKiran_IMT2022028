@@ -33,6 +33,10 @@ pip install opencv-python numpy matplotlib
    ```bash
    python image_stitching.py
 
+### Step 4: Viewing Outputs
+- The outputs for coin detection are saved in `coin_detection_outputs/`
+- The outputs for image stitching are saved in `panorama_outputs1/`
+
 ---
 
 ## Coin Detection and Segmentation
@@ -141,7 +145,7 @@ The stitched image, obtained after key point detection, feature matching, homogr
 - Most of the keypoints were correctly matched in the images. However there were a few outlier matches. 
 - The RANSAC-based homography estimation was able to handle outlier matches.
 - Blending helped in reducing seams. 
-- Black regions were successfully cropped out to improve the final output.  
+- Black regions were successfully cropped out, improving the final output.  
 
 
 
