@@ -87,7 +87,7 @@ pip install opencv-python numpy matplotlib
 
 ---
 
-## Part 2: Creating a Stitched Panorama from Multiple Overlapping Images  
+## Image Stitching for Panorama Creation
 
 
 ### Input Images:
