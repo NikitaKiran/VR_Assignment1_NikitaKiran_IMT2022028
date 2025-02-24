@@ -22,7 +22,7 @@ pip install opencv-python numpy matplotlib
 
 ### Step 2: Prepare Input Images  
 - Place the input image for **coin detection** (`coin_detection_input.jpg`) inside the `inputs/` folder.
-- Place the three images for **image stitching** inside `inputs/panorama_inputs1/` (e.g., `1.jpg`, `2.jpg`, `3.jpg`).
+- Place the three images for **image stitching** (`1.jpg`, `2.jpg`, `3.jpg`) inside `inputs/panorama_inputs1/`.
 
 ### Step 3: Running the Code
 1. After ensuring the images are in the correct path and the dependencies are installed, navigate to the project directory in the terminal.
@@ -61,7 +61,7 @@ pip install opencv-python numpy matplotlib
     - Small contours are filtered out on the basis of area.
     - A mask is obtained for each contour. 
     - The mask is applied on the original image to segment out the coin.
-    - A bounding box is drawn around the coin and the individual coins are cropped and displayed seperately
+    - A bounding box is drawn around the coin and the individual coins are cropped and displayed separately
     - The total number of detected coins are displayed.
 
 
@@ -83,11 +83,12 @@ pip install opencv-python numpy matplotlib
 
 ---
 
-### Observations
+### Observations and Experiment Details
 
-- **Gaussian Blur** significantly improved edge detection by reducing background noise. However the size of the kernel played a very important role. If it was too small, noise still remained and the edge detection had many unecessary edges. If the kernel was too large, blurring was too much and many coin edges were undetected.
-- **Threshold values for Canny edge detection**: The best output was obtained when the lower and upper thresholds were in a ratio of around 1:3.
-- **Filtering out smaller contours** ensured that many invalid countours were not wrongly counted as coins.
+- **Gaussian Blur** significantly improved edge detection by reducing background noise. However the size of the kernel played a very important role. While using a very small kernel, noise still remained and the edge detection had many unnecessary edges. However if the kernel  used was very large, blurring was too much and many coin edges were undetected.
+- **Threshold values for Canny edge detection**: After experimenting with several different values, the best output was obtained when the lower and upper thresholds were in a ratio of around 1:3.
+- Without the **morphological closing operation**, a few of the coin edges were broken and resulted in incomplete contours.
+- **Filtering out smaller contours** ensured that many invalid contours were not wrongly counted as coins.
 
 ---
 
@@ -106,7 +107,7 @@ pip install opencv-python numpy matplotlib
 We used the **SIFT** feature detector to identify key points in each of the overlapping images. SIFT is invariant to rotation and scale, making it suitable for feature detection in image stitching.  
 
 #### 2. Feature Matching  
-The **Brute-Force Matcher (BFMatcher)** with was used to match key points between consecutive images. Lowe's ratio test was used to ensure only good matches were retained. The ratio test compares the distance of the closest match to the distance of the second closest match. If the ratio of these distances is below a certain threshold ( 0.75), the match is considered good.
+The **Brute-Force Matcher (BFMatcher)** was used to match key points between consecutive images. Lowe's ratio test was used to ensure only good matches were retained. The ratio test compares the distance of the closest match to the distance of the second closest match. If the ratio of these distances is below a certain threshold ( 0.75), the match is considered good.
 
 #### 3. Homography Transformation  
 A **homography matrix** was computed using **RANSAC (Random Sample Consensus)** to align the images based on matched key points. This transformation ensures proper perspective warping and alignment.  
@@ -115,7 +116,7 @@ A **homography matrix** was computed using **RANSAC (Random Sample Consensus)** 
 Each image was warped using **perspective transformation**, aligning it to the previous image in the sequence. The images were then blended (using linear blending) to form a seamless panorama.  
 
 #### 5. Cropping  
-To remove black regions introduced by warping, threshholding followed by bounding box detection and cropping was used, ensuring the final panorama had no unnecessary black spaces.  
+To remove black regions introduced by warping, thresholding followed by bounding box detection and cropping was used, ensuring the final panorama had no unnecessary black spaces.  
 
 ---
 
@@ -140,12 +141,13 @@ The stitched image, obtained after key point detection, feature matching, homogr
 
 ---
 
-### Observations  
+### Observations  and Experiment Details
 
 - Most of the keypoints were correctly matched in the images. However there were a few outlier matches. 
 - The RANSAC-based homography estimation was able to handle outlier matches.
-- Blending helped in reducing seams. 
-- Black regions were successfully cropped out, improving the final output.  
+- Stitching the images together without blending resulted in seams. Thus I used linear blending to ensure the images were stitched together seamlessly.
+- Without cropping, black regions were present at the edges of the image. Thus cropping was needed to remove them.
+
 
 
 
