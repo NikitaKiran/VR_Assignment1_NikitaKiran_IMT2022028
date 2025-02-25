@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def save_image(title, img):
+    # Function to save image with the given filename
     if len(img.shape) == 3:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     plt.figure(figsize=(10, 5))
@@ -12,12 +13,14 @@ def save_image(title, img):
     plt.savefig(f'panorama_outputs1/{title}.jpg')
 
 def detect_keypoints_and_descriptors(image):
+    # Detect keypoints and compute descriptors using SIFT
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     sift = cv2.SIFT_create()
     keypoints, descriptors = sift.detectAndCompute(gray, None)
     return keypoints, descriptors
 
 def match_keypoints(descriptors1, descriptors2):
+    # Match keypoints using Brute-Force Matcher
     bf = cv2.BFMatcher(normType=cv2.NORM_L2, crossCheck=False)
     matches = bf.knnMatch(descriptors1, descriptors2, k = 2)
     # Apply Lowe's ratio test

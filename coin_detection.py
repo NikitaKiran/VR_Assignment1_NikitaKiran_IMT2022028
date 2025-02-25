@@ -63,7 +63,7 @@ def segment_and_count(contours, image):
 
         # Get bounding box around the coin
         x, y, w, h = cv2.boundingRect(contour)
-        cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)  # Draw bounding box
+        cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2) 
 
         # Crop the coin and add to the list
         individual_coins.append(coin[y:y+h, x:x+w])
