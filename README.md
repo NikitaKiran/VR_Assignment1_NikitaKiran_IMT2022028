@@ -104,16 +104,18 @@ pip install opencv-python numpy matplotlib
 ### Methodology  
 
 #### 1. Keypoint Detection  
-We used the **SIFT** feature detector to identify key points in each of the overlapping images. SIFT is invariant to rotation and scale, making it suitable for feature detection in image stitching.  
+I used the **SIFT** feature detector to identify key points in each of the overlapping images. SIFT is invariant to rotation and scale, making it suitable for feature detection in image stitching.  
 
 #### 2. Feature Matching  
 The **Brute-Force Matcher (BFMatcher)** was used to match key points between consecutive images. Lowe's ratio test was used to ensure only good matches were retained. The ratio test compares the distance of the closest match to the distance of the second closest match. If the ratio of these distances is below a certain threshold ( 0.75), the match is considered good.
 
 #### 3. Homography Transformation  
-A **homography matrix** was computed using **RANSAC (Random Sample Consensus)** to align the images based on matched key points. This transformation ensures proper perspective warping and alignment.  
+To align overlapping images accurately, a **homography matrix** was computed using **RANSAC (Random Sample Consensus)**. This transformation maps corresponding key points between image pairs, ensuring proper perspective correction and minimizing alignment errors caused by outliers.
+  
 
 #### 4. Image Warping and Stitching  
-Each image was warped using **perspective transformation**, aligning it to the previous image in the sequence. The images were then blended (using linear blending) to form a seamless panorama.  
+Each image was warped using the estimated homography matrix, transforming it into the reference frame of the previous image in the sequence. The warped images were then stitched together using **linear blending**, ensuring a smooth transition between overlapping regions. This prevents visible seams.
+
 
 #### 5. Cropping  
 To remove black regions introduced by warping, thresholding followed by bounding box detection and cropping was used, ensuring the final panorama had no unnecessary black spaces.  
