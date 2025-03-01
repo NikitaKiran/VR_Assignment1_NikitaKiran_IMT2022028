@@ -42,9 +42,17 @@ pip install opencv-python numpy matplotlib
 ## Coin Detection and Segmentation
 
 
-### Input Image:
+### Input Image 1:
 
 ![Image Description](inputs/coin_detection_input.jpg)
+
+### Input Image 2:
+
+![Image Description](inputs/coin_detection_input_2.jpg)
+
+### Input Image 3:
+
+![Image Description](inputs/coin_detection_input_3.jpg)
 
 ### Methodology
 
@@ -69,17 +77,38 @@ pip install opencv-python numpy matplotlib
 
 1. **Edge Detection & Outlining:**  
    - Coins in the image are successfully detected and highlighted with contours.
+
+   #### For Image 1:
      ![Image Description](coin_detection_outputs/coin-detection-canny.jpg)
      ![Image Description](coin_detection_outputs/coin-detection-contours.jpg)
+   
+   #### For Image 2:
+   ![Image Description](coin_detection_outputs2/coin-detection-canny.jpg)
+   ![Image Description](coin_detection_outputs2/coin-detection-contours.jpg)
 
+   #### For Image 3:
+   ![Image Description](coin_detection_outputs3/coin-detection-canny.jpg)
+   ![Image Description](coin_detection_outputs3/coin-detection-contours.jpg)
    
 2. **Segmentation and Counting:**  
    - Each coin is **accurately isolated**.
    - Filtering out invalid contours helps avoid incorrect segmentation.
    - The total number of coins is correctly displayed.
+
+   #### Image 1 Results:
      ![Image Description](coin_detection_outputs/segmented_coins.jpg)
      ![Image Description](coin_detection_outputs/individual_coins.jpg)
      ![Image Description](coin_detection_outputs/FinalOutput.png)
+
+   #### Image 2 Results:
+     ![Image Description](coin_detection_outputs2/segmented_coins.jpg)
+     ![Image Description](coin_detection_outputs2/individual_coins.jpg)
+   
+   
+   #### Image 3 Results:
+     ![Image Description](coin_detection_outputs3/segmented_coins.jpg)
+     ![Image Description](coin_detection_outputs3/individual_coins.jpg)
+
 
 ---
 
@@ -95,11 +124,17 @@ pip install opencv-python numpy matplotlib
 ## Image Stitching for Panorama Creation
 
 
-### Input Images:
+### Input Images 1:
 
 ![Image Description](inputs/panorama_inputs2/1.jpg)
 ![Image Description](inputs/panorama_inputs2/2.jpg)
 ![Image Description](inputs/panorama_inputs2/3.jpg)
+
+### Input Images 2:
+
+![Image Description](inputs/panorama_inputs1/1.jpg)
+![Image Description](inputs/panorama_inputs1/2.jpg)
+![Image Description](inputs/panorama_inputs1/3.jpg)
 
 ### Methodology  
 
@@ -126,21 +161,33 @@ To remove black regions introduced by warping, thresholding followed by bounding
 
 
 **Key Points Visualization:**  
+####  For Example 1
 ![Key Points](panorama_outputs2/keypoints1.jpg) 
 ![Key Points](panorama_outputs2/keypoints2.jpg) 
-![Key Points](panorama_outputs2/keypoints3.jpg)  
+![Key Points](panorama_outputs2/keypoints3.jpg) 
+
+####  For Example 2
+![Key Points](panorama_outputs1/keypoints1.jpg) 
+![Key Points](panorama_outputs1/keypoints2.jpg) 
+![Key Points](panorama_outputs1/keypoints3.jpg) 
 
 **Visualisation of 50 best matches**
-
+####  For Example 1
 ![Key Points](panorama_outputs2/keypoint_matches_0_and_1.jpg) 
 ![Key Points](panorama_outputs2/keypoint_matches_1_and_2.jpg) 
 
+####  For Example 2
+![Key Points](panorama_outputs1/keypoint_matches_0_and_1.jpg) 
+![Key Points](panorama_outputs1/keypoint_matches_1_and_2.jpg) 
 
 #### Final Stitched Panorama  
 The stitched image, obtained after key point detection, feature matching, homography transformation, warping and blending.  
 
+####  For Example 1
 ![Key Points](panorama_outputs2/final-panorama.jpg) 
 
+####  For Example 2
+![Key Points](panorama_outputs1/final-panorama.jpg) 
 ---
 
 ### Observations  and Experiment Details
